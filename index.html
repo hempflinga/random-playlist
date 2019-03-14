@@ -123,7 +123,6 @@ var vultureArray = ["https://embed.music.apple.com/us/playlist/intro-to-alice-co
 "https://embed.music.apple.com/us/playlist/house-party/pl.bde8d220e8cc4034ad0b7f27fd4e27af target=_blank;House Party;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
 "https://embed.music.apple.com/us/playlist/staple-singers-gospel-protest/pl.fe25aff725d44da2a7c1ea723babd857;The Staple Singers: Gospel and Protest;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
 "https://embed.music.apple.com/us/playlist/dylanesque/pl.4dde63c12b9e4aa4a6f06a108911a083;Dylanesque;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
-"https://embed.music.apple.com/us/playlist/opening-lines-1-2-3-4!/pl.86271932acbe491e9fd6a7b07abea396;Opening Lines: 1-2-3-4!;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
 "https://embed.music.apple.com/us/playlist/pop-for-jorts/pl.eb9e9ba21aa844c395682197502c9465;Pop for Jorts;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
 "https://embed.music.apple.com/us/playlist/no-problem-with-houston/pl.d24863437ecb490f96e923cb9305321c;No Problem With Houston;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
 "https://embed.music.apple.com/us/playlist/blue-note-records-jazz-funk/pl.ffe8a13a22eb4c4fbf6edd2277f993a8;Blue Note Records: Jazz Funk;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
@@ -204,8 +203,27 @@ function allPlaylists() {
 		a.setAttribute('href','#')
 		a.setAttribute('onClick','choosePlist(this)')
 	}
+	var li = document.createElement('li');
+	navvyboi.appendChild(li);
+
+	var a = document.createElement('a');
+	li.appendChild(a);
+	li.setAttribute('class','collection-item')
+
+	var t = document.createTextNode('');
+	a.appendChild(t);
+	var li = document.createElement('li');
+	navvyboi.appendChild(li);
+
+	var a = document.createElement('a');
+	li.appendChild(a);
+	li.setAttribute('class','collection-item')
+
+	var t = document.createTextNode('');
+	a.appendChild(t);
 }
 
+		
 allPlaylists();
 function rList() {
 	pList.src = arrarr.randomValue().randomValue().split(';')[0];
