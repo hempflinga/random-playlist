@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+		<link rel="shortcut icon" type="image/x-icon" href="round-music_note-24px-01.png" alt="Favicon"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		
+		<style>
+			.siteicon {
+				font-size: 9rem;
+				color: #FF2D55;
+				text-shadow: 0 2px 8px rgba(0,0,0,0.30), 0 2px 20px rgba(255,45,85,.7);
+			}
+			
+			.btn:hover, .btn-large:hover, .btn-small:hover {
+				background-color: #FF2D55;
+			}
+
+
+			.appl-red-bg {
+				background-color: #FF2D55;
+			}
+			
+			.lTitle {
+				color: #FF2D55;
+			}
+		</style>
+	</head>
+	<body>
+	<header>
+			<div class="container">
+				<div class="row">
+					<div class="col s12 m8 offset-m1 xl7 offset-xl3">
+						<h1 class="header">Playlist Randomizer</h1>
+						<p class="blue-grey-text">The best playlists according to <a href="https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html">Vulture</a>, <a href="https://www.complex.com/music/2019/01/best-apple-music-playlists-right-now/">Complex</a>, and <a href="https://uproxx.com/music/best-apple-music-playlists-right-now-2018/">Uproxx</a>.</p>
+					</div>
+				</div>
+			</div>
+	</header>
+	<ul id="navvyboi" class="sidenav sidenav-fixed with-header" style="transform: translateX(0px);">
+		<li class="collection-header center-align"> 
+			<h1>
+				<i class="material-icons siteicon">
+					music_note
+				</i>
+			</h1>
+		</li>
+		<li>
+			<div class="divider"></div>
+		</li>
+		<li class="collection-item center-align lTitle">
+			<h5>Playlists</h5>
+			<div class="divider"></div>
+		</li>
+		
+		
+	</ul>
+	<main>
+		<div class="container">
+			<div class="row">
+				<div class="col s12 m8 offset-m1 xl7 offset-xl3">
+					<iframe id="pList" allow="autoplay *; encrypted-media *;" frameborder="0" height="500px" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"></iframe>
+				</div>
+			</div>
+			<div class="row center-align">
+				<a class="waves-effect waves-light btn appl-red-bg" onClick="rList()"><i class="material-icons right">shuffle</i>Random List</a>
+			</div>
+			
+		</div>
+		
+	</main>
+
+<script>
+var navvyboi = document.getElementById('navvyboi');
+var pList = document.getElementById('pList');
+var vultureSource = ';https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html' + ';Vulture: The 50 Best Playlists on Apple Music';
+var complexSource = ';https://www.complex.com/music/2019/01/best-apple-music-playlists-right-now/' + ';The Best Apple Music Playlists Right Now';
+var uproxxSource = ';https://uproxx.com/music/best-apple-music-playlists-right-now-2018/;All Of The Best Apple Music Playlists That You Need To Be Listening To",';
+
+var vultureArray = ["https://embed.music.apple.com/us/playlist/intro-to-alice-coltrane/pl.ea8a00ee10e94d7a9002583a337cbd3f;Intro to Alice Coltrane;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/melvins-deep-cuts/pl.adc8f720731842f8ac2eaf6d00ac38bd;Melvins: Deep Cuts;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/inspired-by-the-beach-boys/pl.e4d175deb7ea4108a2f010cd250064c2;Inspired by the Beach Boys;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/inspired-by-808s-heartbreak/pl.2faffa602c8644b5a840e4359e265503;Inspired by 808s & Heartbreak;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/fka-twigs-influences/pl.bed537e41be74f64a3b179e8317bd807;FKA Twigs: Influences;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/country-hits-1952/pl.e66f80beaa944f6bb948798ff3f730d0;Country Hits: 1952;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/singer-songwriter-gems-1965/pl.9a8bd635a7584f51bd1293a368b0335e;Singer/Songwriter Gems: 1965;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/family-tree-parliament-funkadelic/pl.29a4519347084eef9e37ffc7705c0020&xcust=__p_a-7df70b4361c8e44dc31025b8b0da5b26__z_m__d_D;Family Tree: Parliament-Funkadelic;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/in-the-mix-carl-craig/pl.3f89fc4e6fdd4e5d9c330259c73f93ac;In the Mix: Carl Craig;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/beyond-the-hits-new-wave/pl.01ccb3295d1748e8a23d54273fc17981;Beyond the Hits: New Wave;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/behind-boards-toy-selectah/pl.f32a6b6211274c43b896fcce864cb8eb;Behind the Boards: Toy Selectah;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/sampled-art-of-noise/pl.95d1f1e58ba0482da3a5cd008ef8d6a0;Sampled: Art of Noise;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/sounds-like-dj-mustard/pl.c34c69b26fcf45e8955639aeee7fb615;Sounds Like: DJ Mustard;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/reggae-clash-series-coxsone/pl.5c5d4418a8e84614baac9f10507fa46e;Reggae Clash Series: Coxsone Dodd vs. Duke Reid;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/classic-45s-early-rock-pop/pl.a37fb8418b5740e299a3048d7731cb1e;Classic 45s: Early Rock, Pop, and Soul;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/classic-45s-punk-post-punk/pl.b18c0d30dece42c49e37610e9eb510cc;Classic 45s: Punk, Post-Punk, and Indie;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/best-of-future-garage/pl.0e5c6fcd79be40f9ab92b65bc2bd9bed;Best of Future Garage;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/roots-of-future-garage/pl.b70012c4640f405e84d05e97b503aa9e;Roots of Future Garage;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/indie-pop-forefathers-vol.-1/pl.bbfe3a27941d4b0f8754ea39f12c021c;Indie Pop Forefathers 1;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/indie-pop-forefathers-vol.-2/pl.02a8a52e20464f8abc1a8e3b67da32c3;Indie Pop Forefathers 2;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/indie-pop-forefathers-vol.-3/pl.4f1521ed8c674d4191b94ca7e0549a40;Indie Pop Forefathers 3;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/songs-in-colours/pl.30c96854857b4ea08d6805c94f5807b0;Songs in Colours (Jamie xx);https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/shades-of-cool/pl.bc6d807269e8422eb135fb216e3137c7;Shades of Cool (Lana Del Rey);https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/best-synthesizer-soundtracks/pl.d3ed4594d015480e930c0807624827a9;Best Synthesizer Soundtracks for Films;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/best-music-from-leonardo-dicaprio/pl.2714879be4934f04a899b61557311cf8 target=_blank;Slackers and Swingers: Music From the Indie Film Revolution;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/slackers-swingers-music-from/pl.402d7b891d3d4f389619d12b05517d51 target=_blank;Leonard DiCaprio’s;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/songs-that-predicted-shoegaze/pl.744db01627214542b464eab6e7c48fa2;Songs That Predicted Shoegaze and Dream-Pop;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://itunes.apple.com/gb/playlist/grime-2.0/pl.9d402bfa71f449ca964aa2b92e12066a;Grime 2.0;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/turkish-psychedelic-folk-tunes/pl.ecb307db12624a8bbe7d7d1053a3bd7c;Turkish Psychedelic Folk Songs;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/best-of-ghana/pl.49722f9bdc41488eb7e68652154b2557;Best of Ghana;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/brazillions-excellent-tropicalia/pl.f5bc3c674aa342209f992c6703fc6fe4;Brazillions: Excellent Tropicalia and Post-Tropicalia;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/global-bass-tecnobrega/pl.25aac38eb0c44d4c865231e631efec00;Global Bass: Tecnobrega;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/bowie-in-berlin/pl.18df52da188a4d39be68a43ae1456771;Bowie in Berlin;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/workout-like-beyonce/pl.38bd1d3b8a854fb1b22251bd29faf5c6;Workout Like Beyoncé;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/americana-troubadours/pl.8d3f9256d54a459a8d5807248f8d66fc;Americana Troubadours;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/jukebox-hits-classic-blues/pl.049605c398774620a9803f30bd710bdd;Jukebox Hits: Classic Blues;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/movin-and-groovin/pl.61c7a80d0cae4c0c9a8921e378460047;Movin’ and Groovin’;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/lets-have-a-party/pl.186c147ad9874fdb9ca555ac515b2a34;Let’s Have a Party;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/soul-brother-2/pl.bb6ce9d34230460faf9d902cefdc145e;Soul Brother No. 2;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/cinematic-soul/pl.ddad0bbf06b34b21b907900449a9d626 target=_blank;Cinematic Soul;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/year-of-the-woman/pl.d68c00db0aa746faa143cdcef4dd8826;Year of the Woman;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/hipsters-guide-to-country/pl.52d5351fbf3a4a66a0e4d5aeb03a9346 target=_blank;Hipster’s Guide to Country;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/house-party/pl.bde8d220e8cc4034ad0b7f27fd4e27af target=_blank;House Party;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/staple-singers-gospel-protest/pl.fe25aff725d44da2a7c1ea723babd857;The Staple Singers: Gospel and Protest;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/dylanesque/pl.4dde63c12b9e4aa4a6f06a108911a083;Dylanesque;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/opening-lines-1-2-3-4!/pl.86271932acbe491e9fd6a7b07abea396;Opening Lines: 1-2-3-4!;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/pop-for-jorts/pl.eb9e9ba21aa844c395682197502c9465;Pop for Jorts;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/no-problem-with-houston/pl.d24863437ecb490f96e923cb9305321c;No Problem With Houston;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/blue-note-records-jazz-funk/pl.ffe8a13a22eb4c4fbf6edd2277f993a8;Blue Note Records: Jazz Funk;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/if-you-like...-kind-of-blue/pl.fa55e1cdf284446d852dc54b7adca69a;If You Like …  Kind of Blue;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/motown-for-the-whole-family/pl.ebb88b1dc6994ee7978ef9f4f748db12;Motown for the Whole Family;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/the-3am-drive-home/pl.c215374de965449fbf0dca901b9597b1;The 3 a.m. Drive Home;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/daft-punks-teachers/pl.48e0d851487a4c2a9966e9d96b9ddbc1;Daft Punk’s Teachers;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/getting-parents-to-like-noise/pl.f9ffe004d8bc4852b7008a92f84d4ba4;Getting Parents to Like Noise;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/its-a-new-day/pl.a465c3728db1483a815084de65f68e11;It’s a New Day;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/girls-are-saving-indie-rock/pl.05fad47c0f0f4db6a5ed39e422f75bc6;Girls Are Saving Indie Rock;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/surf-rock-para-el-verano/pl.cca8a8b1dfcb49aabc555f8726f596a4;Surf Rock Para el Verano;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music",
+"https://embed.music.apple.com/us/playlist/ambient-music-studying/pl.572ed2f13c9c493ea5f303108742b13c;Ambient Music: Studying;https://www.vulture.com/2015/10/50-best-playlists-on-apple-music.html;Vulture: The 50 Best Playlists on Apple Music"
+];
+var complexArray = ["https://embed.music.apple.com/us/playlist/breaking-hip-hop/pl.74fdbee9582349a4bdca600cbdffa2e9;Breaking Hip-Hop;https://www.complex.com/music/2019/01/best-apple-music-playlists-right-now/;The Best Apple Music Playlists Right Now",
+"https://embed.music.apple.com/us/playlist/soul-brother-no-2/pl.7927da5af7904fd18d1cadc916461e15;Soul Brother No. 2;https://www.complex.com/music/2019/01/best-apple-music-playlists-right-now/;The Best Apple Music Playlists Right Now",
+"https://embed.music.apple.com/us/playlist/in-my-room/pl.2a0b1ea7704842f4b956e959067b8389;In My Room;https://www.complex.com/music/2019/01/best-apple-music-playlists-right-now/;The Best Apple Music Playlists Right Now",
+"https://embed.music.apple.com/us/playlist/the-a-list-hip-hop/pl.abe8ba42278f4ef490e3a9fc5ec8e8c5;The A-List: Hip-Hop;https://www.complex.com/music/2019/01/best-apple-music-playlists-right-now/;The Best Apple Music Playlists Right Now",
+"https://embed.music.apple.com/us/playlist/midnight-city/pl.f494429097a74da48204a51b7f25901b;Midnight City;https://www.complex.com/music/2019/01/best-apple-music-playlists-right-now/;The Best Apple Music Playlists Right Now",
+"https://embed.music.apple.com/us/playlist/the-new-atlanta/pl.5766fcca72a343babd559ff314531884;The New Atlanta;https://www.complex.com/music/2019/01/best-apple-music-playlists-right-now/;The Best Apple Music Playlists Right Now",
+"https://embed.music.apple.com/us/playlist/the-new-chicago/pl.ff800933aee8448992cb5c178a4c2336;The New Chicago;https://www.complex.com/music/2019/01/best-apple-music-playlists-right-now/;The Best Apple Music Playlists Right Now",
+"https://embed.music.apple.com/us/playlist/motown-love-songs/pl.9ccdefe1308f405d8b3491397005690d;Motown Love Songs;https://www.complex.com/music/2019/01/best-apple-music-playlists-right-now/;The Best Apple Music Playlists Right Now",
+"https://embed.music.apple.com/us/playlist/blonded-los-santos-97-8-fm-gtav/pl.1bd5e20b631f48129925095572936c3c;Blonded Los Santos 97.8 FM;https://www.complex.com/music/2019/01/best-apple-music-playlists-right-now/;The Best Apple Music Playlists Right Now",
+"https://embed.music.apple.com/us/playlist/the-lounge/pl.46bf6d7a51aa48b6a27b37267d293f7f;The Lounge;https://www.complex.com/music/2019/01/best-apple-music-playlists-right-now/;The Best Apple Music Playlists Right Now",
+"https://embed.music.apple.com/us/playlist/its-lit/pl.2d4d74790f074233b82d07bfae5c219c;It’s Lit!!!;https://www.complex.com/music/2019/01/best-apple-music-playlists-right-now/;The Best Apple Music Playlists Right Now",
+"https://embed.music.apple.com/us/playlist/new-fire/pl.f19f6b5be8474fe789e36a6242f6113e;New Fire;https://www.complex.com/music/2019/01/best-apple-music-playlists-right-now/;The Best Apple Music Playlists Right Now",
+"https://embed.music.apple.com/us/playlist/slow-down-2-speed-up/pl.4a5a2124f37c41a9a93d09e6f610d973;Slow Down 2 Speed Up;https://www.complex.com/music/2019/01/best-apple-music-playlists-right-now/;The Best Apple Music Playlists Right Now",
+"https://embed.music.apple.com/us/playlist/songs-of-the-summer/pl.34c6bf42a176492abb918edb57b565e9;Songs of the Summer;https://www.complex.com/music/2019/01/best-apple-music-playlists-right-now/;The Best Apple Music Playlists Right Now",
+"https://embed.music.apple.com/us/playlist/heartbreak-pop/pl.91f43a875d694022ba4b338fce6a8c48;Heartbreak Pop;https://www.complex.com/music/2019/01/best-apple-music-playlists-right-now/;The Best Apple Music Playlists Right Now"];
+var uproxxArray = ["https://embed.music.apple.com/us/playlist/best-of-the-week/pl.2b0e6e332fdf4b7a91164da3162127b5;Best Of The Week (Eclectic);https://uproxx.com/music/best-apple-music-playlists-right-now-2018/;All Of The Best Apple Music Playlists That You Need To Be Listening To",			
+			"https://embed.music.apple.com/us/playlist/ep-62-ovo-sound-radio-playlist/pl.fd34c1a561614a3ea75c3ccf77a53676;Ovo Sound Radio (Hip-Hop, Curated By Drake);https://uproxx.com/music/best-apple-music-playlists-right-now-2018/;All Of The Best Apple Music Playlists That You Need To Be Listening To",			
+			"https://embed.music.apple.com/us/playlist/weekend-worthy/pl.3baaa090b668436797672b2dfd43d9ce;Weekend Worthy (Upbeat Eclectic);https://uproxx.com/music/best-apple-music-playlists-right-now-2018/;All Of The Best Apple Music Playlists That You Need To Be Listening To",			
+			"https://embed.music.apple.com/us/playlist/elton-johns-playlist/pl.9192e00c1da741719f7b4816d164031e;Elton John’s Rocket Hour (Electic Pop, Curated By Elton John);https://uproxx.com/music/best-apple-music-playlists-right-now-2018/;All Of The Best Apple Music Playlists That You Need To Be Listening To",			
+			"https://embed.music.apple.com/us/playlist/joe-kays-playlist/pl.d0d8631fa7a940a1a2525b1572195b1e;Soulection (Future Soul, Curated By Joe Kay);https://uproxx.com/music/best-apple-music-playlists-right-now-2018/;All Of The Best Apple Music Playlists That You Need To Be Listening To",			
+			"https://embed.music.apple.com/us/playlist/ep-65-st-vincents-mixtape-delivery-service/pl.9624284e169a4e24a8d63259447e8f5d;St. Vincent Mixtape Delivery Service (Eclectic, Curated By St. Vincent);https://uproxx.com/music/best-apple-music-playlists-right-now-2018/;All Of The Best Apple Music Playlists That You Need To Be Listening To",	
+			"https://embed.music.apple.com/us/playlist/jax-jones-playlist/pl.04bc8fd7ca0a4e2ea6cecde8d4e8d020;House Work Radio (Dance, Curated By Jax Jones);https://uproxx.com/music/best-apple-music-playlists-right-now-2018/;All Of The Best Apple Music Playlists That You Need To Be Listening To",			
+			"https://embed.music.apple.com/us/playlist/untitled/pl.0e91490f3310408eb1186fc9befb3d11;Untitled (Indie);https://uproxx.com/music/best-apple-music-playlists-right-now-2018/;All Of The Best Apple Music Playlists That You Need To Be Listening To",			
+			"https://embed.music.apple.com/us/playlist/blonded-007/pl.a4c8180cc99041deab45f21dbde3e251;Blonded Radio (Eclectic, Curated By Frank Ocean);https://uproxx.com/music/best-apple-music-playlists-right-now-2018/;All Of The Best Apple Music Playlists That You Need To Be Listening To",			
+			"https://embed.music.apple.com/us/playlist/lars-ulrichs-playlist/pl.a9210cb171294f1f91be43a7e2005d32;It’s Electric (Rock, Curated By Lars Ulrich);https://uproxx.com/music/best-apple-music-playlists-right-now-2018/;All Of The Best Apple Music Playlists That You Need To Be Listening To",			
+			"https://embed.music.apple.com/us/playlist/alison-wonderlands-one-mix-playlist/pl.15d57290309341f68fac92053cd5bd27;One Mix (Dance);https://uproxx.com/music/best-apple-music-playlists-right-now-2018/;All Of The Best Apple Music Playlists That You Need To Be Listening To",			
+			"https://embed.music.apple.com/us/playlist/the-pharmacy-playlist/pl.34f11425bfe3402a8ea0ff4c81626c8e;The Pharmacy (Hip-Hop, Curated By Dr. Dre);https://uproxx.com/music/best-apple-music-playlists-right-now-2018/;All Of The Best Apple Music Playlists That You Need To Be Listening To",			
+			"https://embed.music.apple.com/us/playlist/julie-adenugas-playlist/pl.37d099a8834d4db8a59a30c5a31fc0b6;Julie Adenuga’s Playlist;https://uproxx.com/music/best-apple-music-playlists-right-now-2018/;All Of The Best Apple Music Playlists That You Need To Be Listening To",			
+			"https://embed.music.apple.com/us/playlist/mike-ds-playlist/pl.9e12c7e162f24fd89e735e64af16e6bb;The Echo Chamber (Eclectic, Curated By Mike D);https://uproxx.com/music/best-apple-music-playlists-right-now-2018/;All Of The Best Apple Music Playlists That You Need To Be Listening To",			
+			"https://embed.music.apple.com/us/playlist/charli-xcxs-playlist/pl.e6a85b9150424d7d8bc41476fcf1f699;The Candy Shop (Pop, Curated By Charli XCX);https://uproxx.com/music/best-apple-music-playlists-right-now-2018/;All Of The Best Apple Music Playlists That You Need To Be Listening To"];
+			
+var arrarr = [vultureArray,complexArray,uproxxArray];
+
+Array.prototype.randomValue = function(){
+    return this[Math.floor(Math.random()*this.length)];
+};
+
+function choosePlist(elem) {
+	pList.src = elem.getAttribute('data-embedLink');
+	//console.log(elem.getAttribute('data-embedLink'));
+}
+
+function allPlaylists() {
+	for (i=0;i<vultureArray.length;i++) {
+		var embedLink = vultureArray[i].split(';')[0];
+		var ListName = vultureArray[i].split(';')[1];
+		var srcLink = vultureArray[i].split(';')[2];
+		var title = vultureArray[i].split(';')[3];
+		
+		var c = 'collection-item';
+		var li = document.createElement('li');
+		navvyboi.appendChild(li);
+		
+		var a = document.createElement('a');
+		li.appendChild(a);
+		li.setAttribute('class','collection-item')
+		
+		var t = document.createTextNode(ListName);
+		a.appendChild(t);
+		a.setAttribute('class','truncate')
+		a.setAttribute('data-embedLink',embedLink)
+		a.setAttribute('data-ListName',ListName)
+		a.setAttribute('data-srcLink',srcLink)
+		a.setAttribute('data-title',title)
+		a.setAttribute('href','#')
+		a.setAttribute('onClick','choosePlist(this)')
+	}
+}
+
+allPlaylists();
+function rList() {
+	pList.src = arrarr.randomValue().randomValue().split(';')[0];
+}
+
+rList();
+//console.log(arrarr.randomValue());
+</script>
+  </body>
+</html>
+
+
+
+
